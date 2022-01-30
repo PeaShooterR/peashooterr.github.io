@@ -1,0 +1,149 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #f4626f;
+        }
+
+        .box {
+            overflow: hidden;
+            background-color: white;
+            padding: 30px 30px 30px 30px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
+        }
+
+        .box::before,
+        .box::after {
+            content: "";
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            z-index: -1;
+        }
+
+        .box::before {
+            left: 35%;
+            bottom: -125%;
+            border-top-left-radius: 48%;
+            border-top-right-radius: 49%;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 51%;
+            background-color: rgba(77, 201, 255, 0.5);
+            animation: wawes 6s linear infinite;
+
+        }
+
+        .box::after {
+            left: 30%;
+            bottom: -135%;
+            border-top-left-radius: 51%;
+            border-top-right-radius: 50%;
+            border-bottom-left-radius: 49%;
+            border-bottom-right-radius: 48%;
+            background-color: rgba(77, 201, 255, 0.25);
+            animation: wawes 6s linear infinite;
+        }
+
+        @keyframes wawes {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .box>input {
+            border-radius: 5px;
+            font-size: 20px;
+            background: #d9d9d95c;
+            width: 100%;
+            border: 0;
+            padding: 10px 10px;
+            margin: 15px 0px;
+        }
+
+        .box>button {
+            color: #fff;
+            float: right;
+            font-size: 20px;
+            width: 30%;
+            border: 0;
+            padding: 10px 0;
+            margin-top: 10px;
+            margin-left: 20px;
+            border-radius: 10px;
+            background-color: #f4626f;
+        }
+
+        .box>button:hover {
+            background-color: #f5505e;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .box {
+                width: 85vw;
+                padding: 30px 20px 20px 20px;
+            }
+
+            .box>input {
+                font-size: 20px;
+                margin-top: 0px;
+            }
+
+            .box>button {
+                width: 100%;
+                font-size: 20px;
+                margin-top: 0px;
+                margin-bottom: 15px;
+            }
+
+        }
+    </style>
+    <title>任意门链接解析</title>
+</head>
+
+<body>
+    <form class="box">
+        <input placeholder="https://www.doorzo.app/?n=Sig.Front.SubSite.AppMercari.DetailPage&url=..." id="input">
+        <input placeholder="https://www.mercari.com/jp/items/..." id="output">
+        <button onclick="output.select(); document.execCommand('copy');return false;" id="copy">复制</button>
+        <button onclick="window.open(output.value,'_blank');return false;" id="open">打开</button>
+
+    </form>
+    <script>
+
+        input.addEventListener('input', updateValue);
+        function updateValue(e) {
+
+            var linkEncoded = input.value.split("&url=")[1];
+            var linkDecoded = hex_to_ascii(linkEncoded);
+            function hex_to_ascii(hex) {
+                try {
+                    var ascii = '';
+                    for (var n = 0; n < hex.length; n += 2) {
+                        ascii += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+                    }
+                    return ascii;
+                } catch (e) {
+                    return '';
+                }
+
+            };
+            output.value = linkDecoded;
+        }
+
+    </script>
+</body>
+
+</html>
