@@ -98,6 +98,9 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: icarus
+plugins:
+    animejs: true
+    progressbar: true
 
 marked:
   gfm: true
