@@ -1,0 +1,63 @@
+version: 5.1.0
+logo:
+    text: PeaShooter
+navbar:
+    menu:
+#        Home: /
+    links:
+#        Twitter: https://
+article:
+    highlight:
+        # 代码高亮主题
+        # https://github.com/highlightjs/highlight.js/tree/master/src/styles
+        theme: atom-one-light
+        # 显示复制代码按钮
+        clipboard: true
+        # 代码块的默认折叠状态。可以是"", "folded", "unfolded"
+        fold: unfolded
+        
+    # 文章许可协议
+    licenses:
+        Creative Commons:
+            icon: fab fa-creative-commons
+            url: 'https://creativecommons.org/'
+        'CC BY-NC-SA 4.0': 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+
+sidebar:
+    left:
+        sticky: true
+
+widgets:
+    -
+        position: left
+        type: profile
+        author: PeaShooter
+        author_title: peashooter6426@gmail.com
+        avatar: https://avatars.githubusercontent.com/u/68700748
+        # 是否显示圆形头像
+        avatar_rounded: true
+        social_links:
+            Twitter:
+                icon: fab fa-twitter
+                url: https://twitter.com/ps_urine
+            Telegram:
+                icon: fab fa-telegram
+                url: https://t.me/PeaShooterR
+            GitHub:
+                icon: fab fa-github
+                url: https://github.com/PeaShooterR
+            Youtube:
+                icon: fab fa-youtube
+                url: https://www.youtube.com/@PeaShooterR
+            Bilibili:
+                icon: fab fa-bilibili
+                url: https://space.bilibili.com/2960237
+    -
+        type: toc
+        position: left
+        # 是否显示目录项目的序号
+        index: false
+        
+search:
+    type: insight
+    include_pages: true     # 可选项。设置为false时从搜索结果中排除所有page
