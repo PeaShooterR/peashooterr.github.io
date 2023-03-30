@@ -6,7 +6,7 @@ toc: true
 
 ## 修改卡面图片
 
-替换`/var/mobile/Library/Passes/Cards/aaa.pkpass/cardBackgroundCombined*.`**返回上一层目录，删掉`aaa.cache`文件夹**，呼出Apple Pay界面即可看到卡面变化。
+替换`/var/mobile/Library/Passes/Cards/aaa.pkpass/cardBackgroundCombined*`**返回上一层目录，删掉`aaa.cache`文件夹**，呼出Apple Pay界面即可看到卡面变化。
 
 <!--more-->
 
@@ -31,8 +31,12 @@ toc: true
 
 ## 修改卡号颜色
 
-`/var/mobile/Library/Passes/passes23.sqlite`
+同时修改以下两个文件里对应卡片的`label_color` 和`foreground_color`
 
-卡号颜色是`pass`表里的`label_color`，修改后**重启**手机即可生效。
+`/var/mobile/Library/Passes/passes23.sqlite` （所有卡片信息都在`pass`表里）
+
+`aaa.pkpass/pass.json`
+
+删除`aaa.cache`**重启**手机即可生效。
 
 如果你在没有重启的情况下直接打开了Wallet，你会发现所有卡片都消失了，不用担心，它们并没有被移除，重启后即可恢复。
