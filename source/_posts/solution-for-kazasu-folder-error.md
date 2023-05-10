@@ -13,7 +13,7 @@ ChromeのRemote Debugging機能を使って、**User Agentを対応機種に偽�
 # 原因
 私の場合は、root化などにより、ブラウザのUser Agentが変わったので、対応していない機種と判別されてしまいました。
 
-<img src="お使いの機種ではご利用になれません.jpeg"/>
+<img src="error.jpeg"/>
 
 
 # Remote Debuggingに接続
@@ -27,23 +27,23 @@ PCのChromeで chrome://inspect を開きます。
 
 接続されている機種名、開いているページなどが表示されています。
 私のPixel 4aはなぜかPhone 2になっています。
-<img src="Pixel4a接続.png"/>
+<img src="pixel4a.png"/>
 
 ちなみに同じroot化したPixel 3はちゃんとPixel 3として認識されています、かざすフォルダももちろん使えます。
-<img src="Pixel3接続.png"/>
+<img src="pixel3.png"/>
 
 # User Agentを変更
 「inspect」をクリックして、以下のようにUser Agentを変更します。
-<img src="UserAgent変更.jpeg"/>
+<img src="change_ua.jpeg"/>
 
 
-# 削除
+# かざすフォルダ削除
 ページ内の「かざすフォルダ削除」ボタンをタップすると、おサイフケイタイに進み、かざすフォルダが削除されます。
 <div align="center">
-<img src="かざすフォルダ削除中.png" style="zoom:15%; text-align:center;"/>
+<img src="deleting.png" style="zoom:15%; text-align:center;"/>
 </div>
 
 「お使いの機種ではご利用になれません。」が再び出ますが、おサイフケイタイアプリを再起動すると、削除されていることが確認できます。
 <div align="center">
-<img src="削除済.png" style="zoom:15%; text-align:center;"/>
+<img src="deleted.png" style="zoom:15%; text-align:center;"/>
 </div>
