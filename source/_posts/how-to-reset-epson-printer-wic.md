@@ -45,7 +45,7 @@ epson-printer-snmp：https://github.com/Zedeldi/epson-printer-snmp
 
 
 
-## 1.passwordと書き込み指令を確認する
+# 1.passwordと書き込み指令を確認する
 
 `wicreset`の [Waste counters] - [Read waste counter(s)] を押して、WICを確認します。
 
