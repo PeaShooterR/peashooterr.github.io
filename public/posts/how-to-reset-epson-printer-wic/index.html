@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>EPSON廃インク吸収パッドのリセット方法 - 豌豆小屋</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="豌豆小屋"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="豌豆小屋"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="「WIC Reset Utility（以下wicreset）」という有料ソフトのトライアルを使用して、廃インク吸収パッドカウンタ（Waste Ink Counters、以下WIC）のデータの格納位置を特定し、自分で数値を変更する方法を紹介します。"><meta property="og:type" content="article"><meta property="og:title" content="EPSON廃インク吸収パッドのリセット方法"><meta property="og:url" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/"><meta property="og:site_name" content="豌豆小屋"><meta property="og:description" content="「WIC Reset Utility（以下wicreset）」という有料ソフトのトライアルを使用して、廃インク吸収パッドカウンタ（Waste Ink Counters、以下WIC）のデータの格納位置を特定し、自分で数値を変更する方法を紹介します。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/printer-recognized-by-wicreset.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/read-waste-counter.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/passowrd-and-wic-oids.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/write-command.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/trial.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/trial-log.png"><meta property="og:image" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/succeed.png"><meta property="article:published_time" content="2023-06-21T21:35:12.000Z"><meta property="article:modified_time" content="2023-06-22T01:29:35.655Z"><meta property="article:author" content="PeaShooter"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/printer-recognized-by-wicreset.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://peashooter.cc/posts/how-to-reset-epson-printer-wic/"},"headline":"EPSON廃インク吸収パッドのリセット方法","image":["https://peashooter.cc/posts/how-to-reset-epson-printer-wic/printer-recognized-by-wicreset.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/read-waste-counter.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/passowrd-and-wic-oids.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/write-command.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/trial.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/trial-log.png","https://peashooter.cc/posts/how-to-reset-epson-printer-wic/succeed.png"],"datePublished":"2023-06-21T21:35:12.000Z","dateModified":"2023-06-22T01:29:35.655Z","author":{"@type":"Person","name":"PeaShooter"},"publisher":{"@type":"Organization","name":"豌豆小屋","logo":{"@type":"ImageObject","url":{"text":"PeaShooter"}}},"description":"「WIC Reset Utility（以下wicreset）」という有料ソフトのトライアルを使用して、廃インク吸収パッドカウンタ（Waste Ink Counters、以下WIC）のデータの格納位置を特定し、自分で数値を変更する方法を紹介します。"}</script><link rel="canonical" href="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">PeaShooter</a></div><div class="navbar-menu"><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2023-06-21T21:35:12.000Z" title="6/22/2023, 6:35:12 AM">2023-06-22</time></span><span class="level-item">Updated&nbsp;<time dateTime="2023-06-22T01:29:35.655Z" title="6/22/2023, 10:29:35 AM">2023-06-22</time></span></div></div><h1 class="title is-3 is-size-4-mobile">EPSON廃インク吸収パッドのリセット方法</h1><div class="content"><p>「WIC Reset Utility（以下<code>wicreset</code>）」という有料ソフトのトライアルを使用して、廃インク吸収パッドカウンタ（<strong>W</strong>aste <strong>I</strong>nk <strong>C</strong>ounters、以下WIC）のデータの格納位置を特定し、自分で数値を変更する方法を紹介します。</p>
+<span id="more"></span>
+
+
+
+<h1 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h1><p>wicreset：<a target="_blank" rel="noopener" href="https://www.wic.support/">https://www.wic.support/</a></p>
+<p>epson-printer-snmp：<a target="_blank" rel="noopener" href="https://github.com/Zedeldi/epson-printer-snmp">https://github.com/Zedeldi/epson-printer-snmp</a></p>
+<p>プリンターを<strong>ネット経由</strong>で接続し、wicresetに表示されていることを確認してください。</p>
+<p>（Close assistant for this session または Close assistant forever を押すと、邪魔なダイアログボックスが消えます。）</p>
+<img src="printer-recognized-by-wicreset.png">
+
+
+
+<h1 id="0-予備知識"><a href="#0-予備知識" class="headerlink" title="0.予備知識"></a>0.予備知識</h1><h2 id="読み取り指令"><a href="#読み取り指令" class="headerlink" title="読み取り指令"></a>読み取り指令</h2><p><code>&#123;eeprom_link&#125;.124.124.7.0.&#123;password&#125;.65.190.160.&#123;oid&#125;.0</code></p>
+<h2 id="書き込み指令"><a href="#書き込み指令" class="headerlink" title="書き込み指令"></a>書き込み指令</h2><p><code>&#123;eeprom_link&#125;.124.124.16.0.&#123;password&#125;.66.189.33.&#123;oid&#125;.0.&#123;value&#125;.84.98.116.98.111.114.118.98</code></p>
+<p><code>eeprom_link</code>はどのプリンターも<code>1.3.6.1.4.1.1248.1.2.2.44.1.1.2.1</code>だそうです。</p>
+<p><code>password</code>は<code>0.0</code>から<code>255.255</code>で構成されて、プリンターの型番によって異なる値です。</p>
+<p><code>84.98.116.98.111.114.118.98</code>は「書き込み」を意味する指令で、プリンターの型番によって異なります。</p>
+<p><code>oid</code>は値が格納されているアドレスです。</p>
+<h2 id="1-passwordと書き込み指令を確認する"><a href="#1-passwordと書き込み指令を確認する" class="headerlink" title="1.passwordと書き込み指令を確認する"></a>1.passwordと書き込み指令を確認する</h2><p><code>wicreset</code>の [Waste counters] - [Read waste counter(s)] を押して、WICを確認します。</p>
+<p>WIC1は「廃インク吸収パッド」、WIC2は「フチなし印刷用廃インク吸収パッド」と呼ぶそうです。</p>
+<img src="read-waste-counter.png">
+
+<p>廃インク吸収パッドの使用量が<code>83.98%</code>です。</p>
+<p>次に、下の [Serial Number] - [Read] と [Serial Number] - [Write] を押します。</p>
+<p>これで「読み取り」と「書き込み」をしたので<code>wicreset</code>のログに<code>password</code>と書き込み指令が残っているはずです。</p>
+<p>ログは<code>%appdata%\wicreset\application.log</code>に保存されています。</p>
+<img src="passowrd-and-wic-oids.png">
+
+<img src="write-command.png">
+
+<p>私のプリンタの<code>password</code>は<code>85, 5</code>、書き込み指令は<code>78.118.116.100.98.115.106.47</code>です。</p>
+<p><code>24, 25, 30, 26, 27, 34</code>を読み取ったあとWICが出たので<strong>おそらく</strong>WICはこれらのOIDにで保存されています。</p>
+<p><code>epson-printer-snmp</code>の<code>main.py</code>を開き、<code>password</code>と書き込み指令を変更します。</p>
+<p><code>password: list[int] = field(default_factory=lambda: [101, 0])</code></p>
+<p>⇒<code>password: list[int] = field(default_factory=lambda: [85, 5])</code></p>
+<p><code>&quot;.84.98.116.98.111.114.118.98&quot;</code></p>
+<p>⇒<code>&quot;.78.118.116.100.98.115.106.47&quot;</code></p>
+<h1 id="2-WICを0に変更してみる"><a href="#2-WICを0に変更してみる" class="headerlink" title="2.WICを0に変更してみる"></a>2.WICを0に変更してみる</h1><h2 id="WICの格納位置"><a href="#WICの格納位置" class="headerlink" title="WICの格納位置"></a>WICの格納位置</h2><p>WICは、連続した4つのOIDに格納されます。私の場合<code>24, 25</code>と<code>26, 27</code>にWIC1とWIC2の値がそれぞれ格納されています。</p>
+<p><code>30</code>と<code>34</code>については<a target="_blank" rel="noopener" href="https://github.com/Zedeldi/epson-printer-snmp/issues/1#issuecomment-1600075591">こちら</a>をご覧ください、これらの値が<code>0</code>の場合は無視して結構です。</p>
+<p><code>epson-printer-snmp</code>の<code>main.py</code>を開き、<code>reset_waste_ink_levels</code>メゾットの<code>data</code>を以下のように変更します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;24: 0, 25: 0, 26: 0, 27: 0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一番最後に</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.reset_waste_ink_levels()</span><br></pre></td></tr></table></figure>
+
+<p>を追加し、実行します。</p>
+<p>WICが<strong>一時的に</strong>0リセットされているはずです、プリンターを<strong>再起動</strong>し、<strong>印刷またはノズルクリーニング</strong>を行なってください。</p>
+<p>WICが0のままであれば……</p>
+<p>おめでとうございます、廃インク吸収パッドを物理的に取り出し、洗浄+交換をしましょう。</p>
+<p>手袋を着用し、服は深い色を選ぶことを強くおすすめします。</p>
+<h1 id="3-WICを限界以上に設定する"><a href="#3-WICを限界以上に設定する" class="headerlink" title="3.WICを限界以上に設定する"></a>3.WICを限界以上に設定する</h1><p>残念ながら、私のプリンターは印刷をすると、WIC1が元の値に戻ってしまいます。</p>
+<p>どうやっら隠された場所にもWIC1の値が格納されているようです。</p>
+<p><code>wicreset</code>のトライアルキーを使って、どこにあるかをみていきましょう。</p>
+<p>「限界に達した」っていうエラーが出ないと、<code>wicreset</code>のトライアルを使用することはできないため、WICが限界以上に設定し、エラーを発生させる必要があります。</p>
+<p>既にWICが限界以上でエラーが出ている方はやる必要がありません。</p>
+<h2 id="WICの計算方法"><a href="#WICの計算方法" class="headerlink" title="WICの計算方法"></a>WICの計算方法</h2><p>ログから<code>24, 25</code>に<code>0x17, 0x0D</code> が保存されていることがわかります。</p>
+<p>これを逆順番に並んで、10進数に変換すると</p>
+<p><code>0x0D17</code>⇒<code>3351</code></p>
+<p>これがWIC1の<strong>使用済みの量</strong>です。WIC1の<strong>総吸収量</strong>で割るとパーセンテージになります。</p>
+<p>なので私のプリンタのWIC1の総吸収量は<code>3351/83.98%=3990</code>です。</p>
+<p>※WIC2の総吸収量と異なります。※</p>
+<h2 id="WICを99-に変更"><a href="#WICを99-に変更" class="headerlink" title="WICを99%に変更"></a>WICを99%に変更</h2><p><code>3990*99%=3950</code>⇒<code>0x0F6E</code></p>
+<p>なので<code>24</code>を<code>0x6E</code>、<code>25</code>を<code>0x0F</code>に設定します。</p>
+<p><code>reset_waste_ink_levels</code>メゾットの<code>data</code>を以下のように変更します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;24: 0x0F, 25: 0x6E&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一番最後に</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.reset_waste_ink_levels()</span><br></pre></td></tr></table></figure>
+
+<p>を追加し、実行します。</p>
+<p>再起動すると、「限界に達した」っていうエラーが出るはずです。</p>
+<h1 id="4-トライアルキーでリセット"><a href="#4-トライアルキーでリセット" class="headerlink" title="4.トライアルキーでリセット"></a>4.トライアルキーでリセット</h1><p>[Waste counters] - [Reset waste counter(s)] を押して、<code>trial</code>を入力し、[OK] を押します。</p>
+<p>WIC1とWIC2両方が<code>80%</code>にリセットされたはずです。</p>
+<img src="trial.png">
+
+
+
+<h1 id="5-書き込まれたOIDの意味"><a href="#5-書き込まれたOIDの意味" class="headerlink" title="5.書き込まれたOIDの意味"></a>5.書き込まれたOIDの意味</h1><img src="trial-log.png">
+
+<p>ログを確認すると、以下のOIDが書き込まれたことがわかります。</p>
+<table>
+<thead>
+<tr>
+<th>OID</th>
+<th>値</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>24</td>
+<td>120</td>
+<td>WIC1の<strong>表示用</strong>データ</td>
+</tr>
+<tr>
+<td>25</td>
+<td>12</td>
+<td>WIC1の<strong>表示用</strong>データ</td>
+</tr>
+<tr>
+<td>26</td>
+<td>44</td>
+<td>WIC2のデータ</td>
+</tr>
+<tr>
+<td>27</td>
+<td>10</td>
+<td>WIC2のデータ</td>
+</tr>
+<tr>
+<td>30</td>
+<td>0</td>
+<td>WIC1の<strong>表示用</strong>データ</td>
+</tr>
+<tr>
+<td>28</td>
+<td>0</td>
+<td>WIC1の<strong>隠しデータ</strong></td>
+</tr>
+<tr>
+<td>29</td>
+<td>0</td>
+<td>WIC1の<strong>隠しデータ</strong></td>
+</tr>
+<tr>
+<td>34</td>
+<td>0</td>
+<td>WIC2のデータ</td>
+</tr>
+<tr>
+<td>46</td>
+<td>94</td>
+<td>WIC1の限界(%)</td>
+</tr>
+<tr>
+<td>47</td>
+<td>94</td>
+<td>WIC2の限界(%)</td>
+</tr>
+<tr>
+<td>49</td>
+<td>0</td>
+<td>不明</td>
+</tr>
+</tbody></table>
+<p>数回の書き込み、再起動、印刷で、プリンターの動きや各OIDの意味が大体わかりました。</p>
+<p><code>28, 29</code>にWIC1のデータがに不明なアルゴリズムで格納されています。</p>
+<p>プリンターは印刷ジョブを受信する度に、隠しデータと表示用データを比較し、大きい値を信頼します。</p>
+<h1 id="6-WICを0に変更してみる"><a href="#6-WICを0に変更してみる" class="headerlink" title="6.WICを0に変更してみる"></a>6.WICを0に変更してみる</h1><p>今度はWIC1の隠しデータと思われる<code>28, 29</code>も<code>0</code>に設定します。</p>
+<p><code>reset_waste_ink_levels</code>メゾットの<code>data</code>を以下のように変更します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;24: 0, 25: 0, 30: 0, 26: 0, 27: 0, 34: 0, 28: 0, 29: 0, 46: 94, 47: 94, 49: 0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>実行し、再起動すると、WICが0%になって、印刷やノズルクリーニングを行っても値は戻りません。</p>
+<img src="succeed.png">
+
+<p>おめでとうございます、廃インク吸収パッドを物理的に取り出し、洗浄+交換をしましょう。</p>
+<p>手袋を着用し、服は深い色を選ぶことを強くおすすめします。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>EPSON廃インク吸収パッドのリセット方法</p><p><a href="https://peashooter.cc/posts/how-to-reset-epson-printer-wic/">https://peashooter.cc/posts/how-to-reset-epson-printer-wic/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>PeaShooter</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2023-06-22</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2023-06-22</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/posts/solution-for-kazasu-folder-error/"><span class="level-item">かざすフォルダ「お使いの機種ではご利用になれません」が出る時の対処法</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/68700748" alt="PeaShooter"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">PeaShooter</p><p class="is-size-6 is-block">peashooter6426@gmail.com</p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com/ps_urine"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Telegram" href="https://t.me/PeaShooterR"><i class="fab fa-telegram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="GitHub" href="https://github.com/PeaShooterR"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Youtube" href="https://www.youtube.com/@PeaShooterR"><i class="fab fa-youtube"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Bilibili" href="https://space.bilibili.com/2960237"><i class="fab fa-bilibili"></i></a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#準備"><span class="level-left"><span class="level-item">準備</span></span></a></li><li><a class="level is-mobile" href="#0-予備知識"><span class="level-left"><span class="level-item">0.予備知識</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#読み取り指令"><span class="level-left"><span class="level-item">読み取り指令</span></span></a></li><li><a class="level is-mobile" href="#書き込み指令"><span class="level-left"><span class="level-item">書き込み指令</span></span></a></li><li><a class="level is-mobile" href="#1-passwordと書き込み指令を確認する"><span class="level-left"><span class="level-item">1.passwordと書き込み指令を確認する</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-WICを0に変更してみる"><span class="level-left"><span class="level-item">2.WICを0に変更してみる</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#WICの格納位置"><span class="level-left"><span class="level-item">WICの格納位置</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-WICを限界以上に設定する"><span class="level-left"><span class="level-item">3.WICを限界以上に設定する</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#WICの計算方法"><span class="level-left"><span class="level-item">WICの計算方法</span></span></a></li><li><a class="level is-mobile" href="#WICを99-に変更"><span class="level-left"><span class="level-item">WICを99%に変更</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-トライアルキーでリセット"><span class="level-left"><span class="level-item">4.トライアルキーでリセット</span></span></a></li><li><a class="level is-mobile" href="#5-書き込まれたOIDの意味"><span class="level-left"><span class="level-item">5.書き込まれたOIDの意味</span></span></a></li><li><a class="level is-mobile" href="#6-WICを0に変更してみる"><span class="level-left"><span class="level-item">6.WICを0に変更してみる</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">PeaShooter</a><p class="is-size-7"><span>&copy; 2023 PeaShooter</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
