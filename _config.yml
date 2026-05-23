@@ -118,7 +118,7 @@ marked:
   headerIds: true
   lazyload: false
   prependRoot: true
-  postAsset: false
+  postAsset: true
   external_link:
     enable: false
     exclude: []
