@@ -163,8 +163,11 @@ settings put global adb_enabled 0/1 # 更改adb状态
 
 >**Else If** `%adb ~ 0`
 
->**Set up Quick Setting TileNumber**
->Command `settings put global adb_enabled 1`
->Use Root `✓`
+>**Set up Quick Setting Tile**
+>Number `1st`
+>Task `Toggle USB Debug`
+>Status `Inctive`
+>Long Click Task `Open Developer Options`
+>Icon `android.resource://net.dinglisch.android.taskerm/drawable/mw_device_usb`
 
 >**End If**
