@@ -166,7 +166,7 @@ settings put global adb_enabled 0/1 # 更改adb状态
 >**Set up Quick Setting Tile**
 >Number `1st`
 >Task `Toggle USB Debug`
->Status `Inctive`
+>Status `Inactive`
 >Long Click Task `Open Developer Options`
 >Icon `android.resource://net.dinglisch.android.taskerm/drawable/mw_device_usb`
 
