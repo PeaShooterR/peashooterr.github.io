@@ -7,6 +7,7 @@ navbar:
     links:
 #        Twitter: https://
 article:
+    og_image: /img/og_image.jpg
     highlight:
         # 代码高亮主题
         # https://github.com/highlightjs/highlight.js/tree/master/src/styles
