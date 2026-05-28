@@ -12,16 +12,22 @@ toc: true
 
 ## 原始卡面图片
 
-推荐使用Illustrator打开
+PDF卡面推荐使用Illustrator打开
 
-* merpay: https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/c101d28967624f679a368c259bdeaa00
-
-* LinePay Prepaid: https://pr-pod5-smp-device-asset.apple.com:443/broker/v1/assets/1bce5a713c5343ed8a47fd7b6a3392b7
-
-* LinePay Credit: https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/a1dc6a5ef4d34a15ab97abcea9413676
-* Suica: https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/ddcbbde0aa184031b5b9f19966162ce4
-* SMBC Olive: https://pr-pod5-smp-device-asset.apple.com:443/broker/v1/assets/06e1a2c57613420e9be5394661616920
-* 中国银行长城借记卡（png）:https://sh-pod2-smp-device-asset.apple.com:443/broker/v1/assets/9d437cf7b19d4280ae521659ebb3c26f 
+| Card Name | Resource Name | URL |
+| :--- | :--- | :--- |
+| JALカード | cardBackgroundCombined.pdf | https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/65e35a6b4bac418d8047bd4a402151cd |
+| JCBカードWplusL | cardBackgroundCombined.pdf | https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/15fd74b8a7fa4313bf72df6101bd3345 |
+| LinePay Credit | cardBackgroundCombined.pdf | https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/a1dc6a5ef4d34a15ab97abcea9413676 |
+| LinePay Prepaid | cardBackgroundCombined.pdf | https://pr-pod5-smp-device-asset.apple.com:443/broker/v1/assets/1bce5a713c5343ed8a47fd7b6a3392b7 |
+| PASMO | cardBackgroundCombined.pdf | https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/545c264d20a84c6394650f7bd68fc894 |
+| Suica | cardBackgroundCombined.pdf | https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/570d9e16c9a84a029160db32330a1f35 |
+| メルペイ電子マネー | cardBackgroundCombined.pdf | https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/c101d28967624f679a368c259bdeaa00 |
+| 三井住友カードOliveフレキシブルペイ | cardBackgroundCombined@2x.png | https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/0da16003ac0c45829028c9e00f1cc633 |
+| 三井住友カードOliveフレキシブルペイ Credit Mode Only | cardBackgroundCombined@2x.png | https://pr-pod8-smp-device-asset.apple.com:443/broker/v1/assets/31e7c52a8bf44ff7a5fee79611412dca |
+| 三井住友カードOliveフレキシブルペイ（初版PDF卡面） | cardBackgroundCombined.pdf | https://pr-pod5-smp-device-asset.apple.com:443/broker/v1/assets/06e1a2c57613420e9be5394661616920 |
+| 中国银行长城借记卡 | cardBackgroundCombined@3x.png | https://sh-pod2-smp-device-asset.apple.com:443/broker/v1/assets/8089fecd7b6b4a91a80b1498f0f888c1 |
+| 中国银行长城洛天依联名借记卡 | cardBackgroundCombined@2x.png | https://sh-pod2-smp-device-asset.apple.com:443/broker/v1/assets/1b8b55c14fa142e59c3cd86fefec1a00 |
 
 ## 我修改的卡面
 点击图片下载
