@@ -1,5 +1,5 @@
 ---
-title: 无越狱提取Apple Pay卡面图片 & 有越狱修改卡面的方法
+title: 无越狱提取 & 有越狱修改Apple Pay卡面图片的方法
 date: 2023-03-29 01:51:49
 toc: true
 ---
@@ -8,10 +8,21 @@ toc: true
 
 #### 非越狱用户：
 
-- 闲鱼购买P12开发者证书，使用”全能签“等工具签名并安装 [FilzaSlop](https://github.com/0xjohnnydev/FilzaSlop)
+闲鱼购买P12开发者证书，使用”全能签“等工具签名并安装 [FilzaSlop](https://github.com/0xjohnnydev/FilzaSlop)
+
+##### 方法一（仅适用于从银行/公交卡App内而非从Wallet App直接添加的卡片）：
+
 - 打开`FilzaSlopeHome/[HMA-C2] App Data/com.apple.PassbookUIService/Library/Caches/com.apple.PassbookUIService/fsCachedData/`，保存此文件夹中约4～6KB大小的文件，重命名为.zip并解压
+
 - 解压得到`cardBackgroundCombined*.urls`，里面是卡面URL
-- 如果没有你想要的卡片，尝试删除并重新添加卡片，然后重复上述操作
+
+- 如果没有你想要的卡片，尝试删除并从你的银行、公交卡App重新添加卡片，然后重复上述操作
+
+##### 方法二（仅适用于删除后会被iCloud备份至云端的卡片）：
+- 开启iCloud中的Wallet备份，然后删除卡片
+- 打开Wallet App中的添加卡片界面，选择 "为你找到的卡片 - 来自其他设备"（Cards Found For You - From other devices），等待卡面图片加载完毕
+- 后台保持Wallet App处于上述界面不动，打开`FilzaSlopeHome/[HMA-C2] App Data/com.apple.Passbook/tmp/TemporaryItems/com.apple.Passbook/{UUID}.pkpass/cardBackgorundCombined*.urls`，里面是卡面URL
+
 
 #### 越狱用户：
 <!--more-->
@@ -33,6 +44,7 @@ PDF卡面推荐使用Illustrator打开
 | Revolut (Blue) | [cardBackgroundCombined@2x.png](https://pr-pod8-smp-device-asset.apple.com:443/broker/v1/assets/3a74988d788a4fe1881fd11d0ee10902) |
 | Revolut (Lilac) | [cardBackgroundCombined@2x.png](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/d466a912c0c74a2297d79560ee5a229f) |
 | Suica | [cardBackgroundCombined.pdf](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/570d9e16c9a84a029160db32330a1f35) |
+| 上海公共交通卡 | [cardBackgroundCombined@2x.png](https://tj-pod2-smp-device-asset.apple.com/broker/v1/assets/08a0a13df96c4261ace41638616db85a) |
 | 上海公共交通卡-支付宝 | [cardBackgroundCombined@2x.png](https://tj-pod2-smp-device-asset.apple.com:443/broker/v1/assets/eea508f166674421bf4d1165ad5ea1ed) |
 | 三井住友カードOliveフレキシブルペイ | [cardBackgroundCombined@2x.png](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/0da16003ac0c45829028c9e00f1cc633) |
 | 三井住友カードOliveフレキシブルペイ Credit Mode Only | [cardBackgroundCombined@2x.png](https://pr-pod8-smp-device-asset.apple.com:443/broker/v1/assets/31e7c52a8bf44ff7a5fee79611412dca) |
