@@ -1,33 +1,54 @@
 ---
-title: 无越狱提取 & 有越狱修改Apple Pay卡面图片的方法
+title: 提取/修改Apple Pay卡面图片的方法
 date: 2023-03-29 01:51:49
 toc: true
 ---
+## 卡面图片保存路径
+#### ①第三方App内添加的卡片
+在第三方App内调用苹果钱包接口添加卡片后，资源文件会缓存文件至：
+`/private/var/mobile/Containers/Data/Application/com.apple.PassbookUIService/Library/Caches/com.apple.PassbookUIService/fsCachedData/`
 
-## 提取卡面图片
+1. 文件夹中约4～6KB大小的文件，重命名为.zip并解压
+2. `cardBackgroundCombined*.urls`里面是卡面资源URL
 
-#### 非越狱用户：
+#### ②备份到iCloud的卡片
+在设置中添加卡片时，曾经添加过并备份到iCloud的卡片会临时下载到：
+`/private/var/mobile/Containers/Data/Application/com.apple.Passbook/tmp/TemporaryItems/com.apple.Passbook/{unique_id}.pkpass/`
+
+1. 开启iCloud中的Wallet备份，然后删除卡片
+2. 打开Wallet App中的添加卡片界面，选择 "为你找到的卡片 - 来自其他设备"（Cards Found For You - From other devices），等待卡面图片加载完毕
+3. 保持Wallet App处于上述界面不动，打开`{unique_id}.pkpass/cardBackgorundCombined*.urls`，里面是卡面图片URL
+
+#### ③钱包内的卡片
+钱包内的卡片路径位于
+`/var/mobile/Library/Passes/Cards/{unique_id}.pkpass/`
+
+- `{unique_id}.pkpass/cardBackgorundCombined*.urls`里面是卡面图片URL
+
+- 修改图片文件`{unique_id}.pkpass/cardBackgroundCombined*`，**返回上一层目录，删掉`{UUID}.cache`文件夹**，即可修改Wallet中显示的卡面图片
+
+- 修改 `/var/mobile/Library/Passes/passes23.sqlite`（passes表）和 `{unique_id}.pkpass/pass.json` 中对应卡片的`label_color` 和`foreground_color`，可以修改Wallet中显示的卡号颜色等，注意修改此文件后必须重启手机Wallet才能正常显示卡片
+
+  <img src="database.png">
+
+## 访问上述路径的方法
+#### FilzaSlop / 3105 (iOS 18, iOS 26, iOS 27 beta 1–4)
+这个漏洞可以提供上述①②路径的读取权限
 
 闲鱼购买P12开发者证书，使用”全能签“等工具签名并安装 [FilzaSlop](https://github.com/0xjohnnydev/FilzaSlop)
 
-##### 方法一（仅适用于从银行/公交卡App内而非从Wallet App直接添加的卡片）：
+应用数据目录位于`FilzaSlopeHome/[HMA-C2] App Data`
 
-- 打开`FilzaSlopeHome/[HMA-C2] App Data/com.apple.PassbookUIService/Library/Caches/com.apple.PassbookUIService/fsCachedData/`，保存此文件夹中约4～6KB大小的文件，重命名为.zip并解压
+#### AirLift漏洞 (iOS18.0–27.0.1, iOS 27.2 beta 1–2)
+这个漏洞可以提供上述①②③路径的**读写**权限
+具体实现有 [AirCard](https://github.com/Mak5er/AirCard)
 
-- 解压得到`cardBackgroundCombined*.urls`，里面是卡面URL
+#### 越狱
+越狱后可以获得上述①②③路径的读写权限
 
-- 如果没有你想要的卡片，尝试删除并从你的银行、公交卡App重新添加卡片，然后重复上述操作
-
-##### 方法二（仅适用于删除后会被iCloud备份至云端的卡片）：
-- 开启iCloud中的Wallet备份，然后删除卡片
-- 打开Wallet App中的添加卡片界面，选择 "为你找到的卡片 - 来自其他设备"（Cards Found For You - From other devices），等待卡面图片加载完毕
-- 后台保持Wallet App处于上述界面不动，打开`FilzaSlopeHome/[HMA-C2] App Data/com.apple.Passbook/tmp/TemporaryItems/com.apple.Passbook/{UUID}.pkpass/cardBackgorundCombined*.urls`，里面是卡面URL
+使用Filza等文件管理器参照上述路径保存/修改文件即可
 
 
-#### 越狱用户：
-<!--more-->
-
-- 正在钱包中的卡片，卡面URL位于`/var/mobile/Library/Passes/Cards/{UUID}.pkpass/cardBackgroundCombined*.urls`
 
 ## 我提取的卡面
 PDF卡面推荐使用Illustrator打开
@@ -43,7 +64,9 @@ PDF卡面推荐使用Illustrator打开
 | PASMO | [cardBackgroundCombined.pdf](https://nc-pod5-smp-device-asset.apple.com:443/broker/v1/assets/545c264d20a84c6394650f7bd68fc894) |
 | Revolut (Blue) | [cardBackgroundCombined@2x.png](https://pr-pod8-smp-device-asset.apple.com:443/broker/v1/assets/3a74988d788a4fe1881fd11d0ee10902) |
 | Revolut (Lilac) | [cardBackgroundCombined@2x.png](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/d466a912c0c74a2297d79560ee5a229f) |
-| Suica | [cardBackgroundCombined.pdf](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/570d9e16c9a84a029160db32330a1f35) |
+| Suica (Penguin) | [cardBackgroundCombined.pdf](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/570d9e16c9a84a029160db32330a1f35) |
+| Suica (No Penguin) | [cardBackgroundCombined.pdf](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/E4kYwaAy41Gsyaut7k7GnvyCAqA8h449UNNB3ibgtNcK) |
+| VポイントPay | [cardBackgroundCombined.pdf](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/7d3b5510d96a4c0e80e0fe5b58f742a1) |
 | 上海公共交通卡 | [cardBackgroundCombined@2x.png](https://tj-pod2-smp-device-asset.apple.com/broker/v1/assets/08a0a13df96c4261ace41638616db85a) |
 | 上海公共交通卡-支付宝 | [cardBackgroundCombined@2x.png](https://tj-pod2-smp-device-asset.apple.com:443/broker/v1/assets/eea508f166674421bf4d1165ad5ea1ed) |
 | 三井住友カードOliveフレキシブルペイ | [cardBackgroundCombined@2x.png](https://nc-pod8-smp-device-asset.apple.com:443/broker/v1/assets/0da16003ac0c45829028c9e00f1cc633) |
@@ -52,21 +75,3 @@ PDF卡面推荐使用Illustrator打开
 | どこでもmajica | [cardBackgroundCombined.pdf](https://pr-pod8-smp-device-asset.apple.com:443/broker/v1/assets/57486ed788ef46138c3bb0e5ac970552) |
 | 中国银行长城借记卡 | [cardBackgroundCombined@3x.png](https://sh-pod2-smp-device-asset.apple.com:443/broker/v1/assets/8089fecd7b6b4a91a80b1498f0f888c1) |
 | 中国银行长城洛天依联名借记卡 | [cardBackgroundCombined@2x.png](https://sh-pod2-smp-device-asset.apple.com:443/broker/v1/assets/1b8b55c14fa142e59c3cd86fefec1a00) |
-
-
-## 修改卡面图片
-
-替换`/var/mobile/Library/Passes/Cards/{UUID}.pkpass/cardBackgroundCombined*`**返回上一层目录，删掉`{UUID}.cache`文件夹**，呼出Apple Pay界面即可看到卡面变化。
-
-
-## 修改卡号颜色
-
-同时修改以下两个文件里对应卡片的`label_color` 和`foreground_color`
-
-`/var/mobile/Library/Passes/passes23.sqlite` （所有卡片信息都在`pass`表里）
-
-`{UUID}.pkpass/pass.json`
-
-删除`{UUID}.cache`**重启**手机即可生效。
-
-如果你在没有重启的情况下直接打开了Wallet，你会发现所有卡片都消失了，不用担心，它们并没有被移除，重启后即可恢复。
